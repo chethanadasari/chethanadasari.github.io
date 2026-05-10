@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chethana Dasari | ECE Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e17;
+    --bg2: #0f1623;
+    --card: #131c2e;
+    --teal: #00e5c0;
+    --teal2: #00b89c;
+    --blue: #4fa3e0;
+    --text: #e8edf5;
+    --muted: #7a8ba0;
+    --border: rgba(0,229,192,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,192,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,192,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 0 60px;
+    position: relative;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--teal);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-size: clamp(42px, 6vw, 68px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.35s forwards;
+  }
+
+  .hero-name span {
+    display: block;
+    background: linear-gradient(135deg, var(--teal), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.5s forwards;
+  }
+
+  .hero-desc {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 520px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.65s forwards;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: #0a0e17;
+    border: none;
+  }
+  .btn-primary:hover { background: var(--teal2); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--teal);
+    border: 1px solid var(--teal);
+  }
+  .btn-outline:hover { background: rgba(0,229,192,0.08); transform: translateY(-2px); }
+
+  .hero-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.6s 1s forwards;
+  }
+
+  .badge-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .badge-circle::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0,229,192,0.2);
+    animation: spin 20s linear infinite;
+  }
+
+  .badge-circle span:first-child {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--teal);
+    line-height: 1;
+  }
+
+  .badge-circle span:last-child {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    text-align: center;
+    padding: 0 10px;
+    margin-top: 4px;
+  }
+
+  .status-dot {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--teal);
+  }
+
+  .status-dot::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2s infinite;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 48px;
+    letter-spacing: -0.5px;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+
+  .about-card h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .about-card p {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .about-card.wide {
+    grid-column: 1 / -1;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .edu-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .edu-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--teal);
+    padding-top: 4px;
+  }
+
+  .edu-degree {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .edu-school {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .edu-modules {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(0,229,192,0.08);
+    color: var(--teal);
+    border: 1px solid rgba(0,229,192,0.2);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--blue));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .project-card:hover { transform: translateY(-4px); border-color: rgba(0,229,192,0.4); }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .project-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .project-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .project-desc {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .project-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 1px;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .skill-group h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .skill-list li {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-list li::before {
+    content: '▸';
+    color: var(--teal);
+    font-size: 10px;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .exp-role {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .exp-company {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--teal);
+  }
+
+  .exp-period {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(0,229,192,0.06);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 20px;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .exp-bullets li {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+  }
+
+  /* ── CERTS ── */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .cert-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cert-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .cert-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .cert-name.inprogress {
+    color: var(--muted);
+  }
+
+  .cert-name.inprogress::after {
+    content: ' (In Progress)';
+    color: var(--blue);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  @media (max-width: 700px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-badge { display: none; }
+    .about-grid, .projects-grid, .skills-grid { grid-template-columns: 1fr; }
+    .about-card.wide { grid-column: 1; }
+    .edu-item { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" style="border-top:none;">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-tag">// ECE Engineer · Dublin, Ireland</p>
+        <h1 class="hero-name">
+          Chethana<span>Dasari</span>
+        </h1>
+        <p class="hero-title">MSc Electronics & Communication Engineering</p>
+        <p class="hero-desc">
+          Engineer with dual degrees in ECE from India and Ireland,<br>
+          skilled in signal systems, embedded tech, MATLAB, Python,<br>
+          and security infrastructure. Open to opportunities in Ireland.
+        </p>
+        <div class="hero-links">
+          <a href="https://www.linkedin.com/in/chethana-dasari/" target="_blank" class="btn btn-primary">LinkedIn Profile</a>
+          <a href="https://github.com/chethanadasari" target="_blank" class="btn btn-outline">GitHub →</a>
+          <a href="mailto:chethanadasari1@gmail.com" class="btn btn-outline">Contact Me</a>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="badge-circle">
+          <span>MSc</span>
+          <span>TU Dublin 2025</span>
+        </div>
+        <div class="status-dot">Available for Work</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div class="container">
+    <p class="section-label">// 01</p>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-card wide">
+        <h3>Professional Summary</h3>
+        <p>
+          I am an Electronics and Communication Engineer with a BE from Dhanalakshmi College of
+          Engineering (Anna University, Chennai) and an MSc from Technological University Dublin,
+          Ireland. Originally from Andhra Pradesh, India, I am currently based in Dublin on a Stamp 1G
+          visa and actively looking for ECE-related roles in Ireland. My background spans electrical
+          systems, signal processing, computer vision, embedded programming, and security
+          infrastructure — and I bring hands-on project experience from both academic and industry settings.
+        </p>
+      </div>
+      <div class="about-card">
+        <h3>Location</h3>
+        <p>📍 Dublin, Ireland<br>Visa: Stamp 1G<br>Origin: Andhra Pradesh, India</p>
+      </div>
+      <div class="about-card">
+        <h3>Contact</h3>
+        <p>
+          📧 chethanadasari1@gmail.com<br>
+          📱 +353 089 950 4713<br>
+          🔗 linkedin.com/in/chethana-dasari
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section>
+  <div class="container">
+    <p class="section-label">// 02</p>
+    <h2 class="section-title">Education</h2>
+
+    <div class="edu-item">
+      <div class="edu-year">2024 – 2025</div>
+      <div>
+        <div class="edu-degree">MSc in Electronics & Communication Engineering</div>
+        <div class="edu-school">Technological University Dublin · Dublin, Ireland</div>
+        <div class="edu-modules">
+          <span class="tag">Electrical Power Systems</span>
+          <span class="tag">Building Services Engineering</span>
+          <span class="tag">Electrical Machines</span>
+          <span class="tag">Power Distribution</span>
+          <span class="tag">Control Systems</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-year">2019 – 2023</div>
+      <div>
+        <div class="edu-degree">BE in Electronics & Communication Engineering</div>
+        <div class="edu-school">Dhanalakshmi College of Engineering · Anna University · Chennai, India</div>
+        <div class="edu-modules">
+          <span class="tag">Signal Processing</span>
+          <span class="tag">Embedded Systems</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Deep Learning</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section>
+  <div class="container">
+    <p class="section-label">// 03</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <a href="https://github.com/chethanadasari/collatz-conjecture-visualisation" target="_blank" class="project-card">
+        <div class="project-icon">📊</div>
+        <div class="project-name">Collatz Conjecture Visualisation</div>
+        <div class="project-desc">
+          Explored the 3x+1 mathematical problem using MATLAB. Ran sequences up to seed 10^50,
+          benchmarked hardware performance, applied Benford's Law, and tested negative number
+          behaviour. Presented to a postgraduate engineering panel at TU Dublin.
+        </div>
+        <div class="project-link">github.com/chethanadasari/collatz-conjecture-visualisation ↗</div>
+      </a>
+
+      <a href="https://github.com/chethanadasari/5g-ofdm-simulation" target="_blank" class="project-card">
+        <div class="project-icon">📡</div>
+        <div class="project-name">5G OFDM Simulation</div>
+        <div class="project-desc">
+          Simulated 5G Orthogonal Frequency Division Multiplexing (OFDM) signal processing.
+          Explored waveform generation, channel modelling, and spectral efficiency relevant
+          to modern wireless communication systems.
+        </div>
+        <div class="project-link">github.com/chethanadasari/5g-ofdm-simulation ↗</div>
+      </a>
+
+      <a href="https://github.com/chethanadasari/cardiac-monitor" target="_blank" class="project-card">
+        <div class="project-icon">❤️</div>
+        <div class="project-name">Cardiac Monitor System</div>
+        <div class="project-desc">
+          Designed a cardiac monitoring system for real-time heart signal tracking.
+          Focused on biomedical signal acquisition and processing using embedded
+          systems principles and data visualisation techniques.
+        </div>
+        <div class="project-link">github.com/chethanadasari/cardiac-monitor ↗</div>
+      </a>
+
+      <div class="project-card" style="cursor:default;">
+        <div class="project-icon">🚗</div>
+        <div class="project-name">Real-time Vehicle Detection & Speed Estimation</div>
+        <div class="project-desc">
+          Built a computer vision system using YOLO and TensorFlow for real-time vehicle
+          detection and speed tracking. Achieved 95% detection accuracy. Led a 4-member
+          team through design, testing, and final presentation.
+        </div>
+        <div class="project-link">BE Final Year Project · Dhanalakshmi College</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section>
+  <div class="container">
+    <p class="section-label">// 04</p>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Engineering</h3>
+        <ul class="skill-list">
+          <li>Electrical Design (LV Systems)</li>
+          <li>AutoCAD (Electrical Layouts)</li>
+          <li>Power Distribution</li>
+          <li>Control Systems</li>
+          <li>Electrical Load Calculations</li>
+          <li>PLC Programming</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Programming & Tools</h3>
+        <ul class="skill-list">
+          <li>MATLAB</li>
+          <li>Python</li>
+          <li>TensorFlow / YOLO</li>
+          <li>HTML</li>
+          <li>Microsoft Excel & Word</li>
+          <li>IT & Networking (CWNA)</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Security & Systems</h3>
+        <ul class="skill-list">
+          <li>CCTV (Avigilon, Tyco, Hanwha)</li>
+          <li>Access Control (CEM, SIPASS)</li>
+          <li>Commissioning & Testing</li>
+          <li>Incident Response</li>
+          <li>Health & Safety Compliance</li>
+          <li>Documentation & Reporting</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section>
+  <div class="container">
+    <p class="section-label">// 05</p>
+    <h2 class="section-title">Work Experience</h2>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Corporate Security Officer</div>
+          <div class="exp-company">Synergy Security · Airbnb HQ · Dublin, Ireland</div>
+        </div>
+        <div class="exp-period">Dublin, Ireland</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Monitored CCTV and access control systems for a major corporate client (Airbnb)</li>
+        <li>Coordinated with GSOC teams on incidents, escalations, and threat response</li>
+        <li>Maintained accurate incident logs, reports, and operational documentation</li>
+        <li>Assisted with routine system checks, alarms monitoring, and testing</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section>
+  <div class="container">
+    <p class="section-label">// 06</p>
+    <h2 class="section-title">Certifications</h2>
+    <div class="certs-grid">
+      <div class="cert-item">
+        <div class="cert-icon">🛡️</div>
+        <div class="cert-name">PSA Security Guarding Licence (Ireland)</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">📶</div>
+        <div class="cert-name">CWNA — Wireless Networking (Udemy)</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🐍</div>
+        <div class="cert-name">Python Programming (Udemy)</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🌐</div>
+        <div class="cert-name">HTML Development (Udemy)</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">⚙️</div>
+        <div class="cert-name">PLC Programming (Udemy)</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">📐</div>
+        <div class="cert-name">CAD / AutoCAD Fundamentals</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🏗️</div>
+        <div class="cert-name inprogress">Revit MEP Beginner</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">⚡</div>
+        <div class="cert-name inprogress">Electrical Design for Buildings (Udemy)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>Chethana Dasari · Dublin, Ireland ·
+      <a href="mailto:chethanadasari1@gmail.com">chethanadasari1@gmail.com</a> ·
+      <a href="https://www.linkedin.com/in/chethana-dasari/" target="_blank">LinkedIn</a> ·
+      <a href="https://github.com/chethanadasari" target="_blank">GitHub</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
