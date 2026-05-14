@@ -1,851 +1,191 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chethana Dasari | ECE Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0a0e17;
-    --bg2: #0f1623;
-    --card: #131c2e;
-    --teal: #00e5c0;
-    --teal2: #00b89c;
-    --blue: #4fa3e0;
-    --text: #e8edf5;
-    --muted: #7a8ba0;
-    --border: rgba(0,229,192,0.15);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Syne', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-  }
-
-  /* Animated grid background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,192,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,192,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 24px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 80px 0 60px;
-    position: relative;
-  }
-
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 40px;
-    align-items: center;
-    width: 100%;
-  }
-
-  .hero-tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    color: var(--teal);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.2s forwards;
-  }
-
-  .hero-name {
-    font-size: clamp(42px, 6vw, 68px);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -1px;
-    margin-bottom: 16px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.35s forwards;
-  }
-
-  .hero-name span {
-    display: block;
-    background: linear-gradient(135deg, var(--teal), var(--blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--muted);
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.5s forwards;
-  }
-
-  .hero-desc {
-    font-family: 'Space Mono', monospace;
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.8;
-    max-width: 520px;
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.65s forwards;
-  }
-
-  .hero-links {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.8s forwards;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-decoration: none;
-    transition: all 0.2s;
-    cursor: pointer;
-  }
-
-  .btn-primary {
-    background: var(--teal);
-    color: #0a0e17;
-    border: none;
-  }
-  .btn-primary:hover { background: var(--teal2); transform: translateY(-2px); }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--teal);
-    border: 1px solid var(--teal);
-  }
-  .btn-outline:hover { background: rgba(0,229,192,0.08); transform: translateY(-2px); }
-
-  .hero-badge {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    opacity: 0;
-    animation: fadeUp 0.6s 1s forwards;
-  }
-
-  .badge-circle {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    background: var(--card);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  .badge-circle::before {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 1px dashed rgba(0,229,192,0.2);
-    animation: spin 20s linear infinite;
-  }
-
-  .badge-circle span:first-child {
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--teal);
-    line-height: 1;
-  }
-
-  .badge-circle span:last-child {
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    color: var(--muted);
-    text-align: center;
-    padding: 0 10px;
-    margin-top: 4px;
-  }
-
-  .status-dot {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--teal);
-  }
-
-  .status-dot::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--teal);
-    animation: pulse 2s infinite;
-  }
-
-  /* ── SECTIONS ── */
-  section {
-    padding: 80px 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--teal);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .section-title {
-    font-size: 36px;
-    font-weight: 800;
-    margin-bottom: 48px;
-    letter-spacing: -0.5px;
-  }
-
-  /* ── ABOUT ── */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-
-  .about-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px;
-  }
-
-  .about-card h3 {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--teal);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .about-card p {
-    font-family: 'Space Mono', monospace;
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  .about-card.wide {
-    grid-column: 1 / -1;
-  }
-
-  /* ── EDUCATION ── */
-  .edu-item {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 24px;
-    margin-bottom: 32px;
-    padding-bottom: 32px;
-    border-bottom: 1px solid var(--border);
-  }
-  .edu-item:last-child { border-bottom: none; margin-bottom: 0; }
-
-  .edu-year {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    color: var(--teal);
-    padding-top: 4px;
-  }
-
-  .edu-degree {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-
-  .edu-school {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
-
-  .edu-modules {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 10px;
-  }
-
-  .tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 4px;
-    background: rgba(0,229,192,0.08);
-    color: var(--teal);
-    border: 1px solid rgba(0,229,192,0.2);
-  }
-
-  /* ── PROJECTS ── */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--teal), var(--blue));
-    transform: scaleX(0);
-    transition: transform 0.3s;
-  }
-
-  .project-card:hover { transform: translateY(-4px); border-color: rgba(0,229,192,0.4); }
-  .project-card:hover::before { transform: scaleX(1); }
-
-  .project-icon {
-    font-size: 28px;
-    margin-bottom: 12px;
-  }
-
-  .project-name {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .project-desc {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 14px;
-  }
-
-  .project-link {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--teal);
-    letter-spacing: 1px;
-  }
-
-  /* ── SKILLS ── */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .skill-group {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-  }
-
-  .skill-group h3 {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--teal);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-
-  .skill-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .skill-list li {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .skill-list li::before {
-    content: '▸';
-    color: var(--teal);
-    font-size: 10px;
-  }
-
-  /* ── EXPERIENCE ── */
-  .exp-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 32px;
-    margin-bottom: 20px;
-    position: relative;
-  }
-
-  .exp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .exp-role {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-
-  .exp-company {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    color: var(--teal);
-  }
-
-  .exp-period {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    background: rgba(0,229,192,0.06);
-    border: 1px solid var(--border);
-    padding: 6px 12px;
-    border-radius: 20px;
-  }
-
-  .exp-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .exp-bullets li {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.7;
-    padding-left: 16px;
-    position: relative;
-  }
-
-  .exp-bullets li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--teal);
-  }
-
-  /* ── CERTS ── */
-  .certs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 14px;
-  }
-
-  .cert-item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .cert-icon {
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-
-  .cert-name {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--text);
-    line-height: 1.5;
-  }
-
-  .cert-name.inprogress {
-    color: var(--muted);
-  }
-
-  .cert-name.inprogress::after {
-    content: ' (In Progress)';
-    color: var(--blue);
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 40px 0;
-    text-align: center;
-  }
-
-  footer p {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-  }
-
-  footer a {
-    color: var(--teal);
-    text-decoration: none;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  @media (max-width: 700px) {
-    .hero-inner { grid-template-columns: 1fr; }
-    .hero-badge { display: none; }
-    .about-grid, .projects-grid, .skills-grid { grid-template-columns: 1fr; }
-    .about-card.wide { grid-column: 1; }
-    .edu-item { grid-template-columns: 1fr; }
-  }
-</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    body {background-color: #0a0c12}
+    p.p1 {margin: 0.0px 0.0px 16.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 48.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2}
+    p.p4 {margin: 0.0px 0.0px 20.0px 0.0px; font: 18.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f}
+    p.p5 {margin: 0.0px 0.0px 32.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 32.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 9.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f}
+    p.p9 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3}
+    p.p10 {margin: 0.0px 0.0px 8.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f}
+    p.p14 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2}
+    p.p15 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f}
+    p.p16 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3; background-color: #1de3b3; background-color: rgba(29, 227, 179, 0.078)}
+    p.p17 {margin: 0.0px 0.0px 0.0px 0.0px; font: 28.0px '.Apple Color Emoji UI'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2}
+    p.p18 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2}
+    p.p19 {margin: 0.0px 0.0px 0.0px 0.0px; font: 9.0px 'Helvetica Neue'; color: #4190d8; -webkit-text-stroke: #4190d8; background-color: #4190d8; background-color: rgba(65, 144, 216, 0.12)}
+    p.p20 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f}
+    p.p23 {margin: 0.0px 0.0px 0.0px 0.0px; font: 20.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2}
+    p.p24 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f; background-color: #1de3b3; background-color: rgba(29, 227, 179, 0.059)}
+    p.p25 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px '.Apple Color Emoji UI'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2}
+    p.p26 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2}
+    p.p27 {margin: 0.0px 0.0px 0.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f}
+    p.p28 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 11.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f}
+    li.li15 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f}
+    li.li22 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #67788f; -webkit-text-stroke: #67788f; background-color: #101522}
+    span.s1 {font-kerning: none}
+    span.s2 {font-kerning: none; color: #0a0c12; background-color: #1de3b3; -webkit-text-stroke: 0px #0a0c12}
+    span.s3 {font-kerning: none; color: #e2e8f2; -webkit-text-stroke: 0px #e2e8f2}
+    span.s4 {font-kerning: none; color: #1de3b3; -webkit-text-stroke: 0px #1de3b3}
+    span.s5 {font-kerning: none; background-color: #101522}
+    span.s6 {font: 13.0px '.Apple Color Emoji UI'; font-kerning: none; background-color: #101522}
+    span.s7 {font: 28.0px '.Apple Color Emoji UI'; font-kerning: none; color: #e2e8f2; -webkit-text-stroke: 0px #e2e8f2}
+    span.s8 {font: 16.0px 'Helvetica Neue'; font-kerning: none; color: #e2e8f2; -webkit-text-stroke: 0px #e2e8f2}
+    span.s9 {font: 11.0px 'Helvetica Neue'; font-kerning: none; color: #67788f; -webkit-text-stroke: 0px #67788f}
+    span.s10 {font: 10.0px 'Helvetica Neue'; font-kerning: none}
+    span.s11 {-webkit-text-stroke: 0px #000000}
+    span.s12 {font: 12.0px 'Helvetica Neue'; font-kerning: none; color: #e2e8f2; -webkit-text-stroke: 0px #e2e8f2}
+    span.s13 {background-color: #101522; -webkit-text-stroke: 0px #000000}
+    span.s14 {font: 11.0px 'Helvetica Neue'; font-kerning: none}
+    ul.ul1 {list-style-type: disc}
+  </style>
 </head>
 <body>
-
-<!-- HERO -->
-<section class="hero" style="border-top:none;">
-  <div class="container">
-    <div class="hero-inner">
-      <div>
-        <p class="hero-tag">// ECE Engineer · Dublin, Ireland</p>
-        <h1 class="hero-name">
-          Chethana<span>Dasari</span>
-        </h1>
-        <p class="hero-title">MSc Electronics & Communication Engineering</p>
-        <p class="hero-desc">
-          Engineer with dual degrees in ECE from India and Ireland,<br>
-          skilled in signal systems, embedded tech, MATLAB, Python,<br>
-          and security infrastructure. Open to opportunities in Ireland.
-        </p>
-        <div class="hero-links">
-          <a href="https://www.linkedin.com/in/chethana-dasari/" target="_blank" class="btn btn-primary">LinkedIn Profile</a>
-          <a href="https://github.com/chethanadasari" target="_blank" class="btn btn-outline">GitHub →</a>
-          <a href="mailto:chethanadasari1@gmail.com" class="btn btn-outline">Contact Me</a>
-        </div>
-      </div>
-      <div class="hero-badge">
-        <div class="badge-circle">
-          <span>MSc</span>
-          <span>TU Dublin 2025</span>
-        </div>
-        <div class="status-dot">Available for Work</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section>
-  <div class="container">
-    <p class="section-label">// 01</p>
-    <h2 class="section-title">About Me</h2>
-    <div class="about-grid">
-      <div class="about-card wide">
-        <h3>Professional Summary</h3>
-        <p>
-          I am an Electronics and Communication Engineer with a BE from Dhanalakshmi College of
-          Engineering (Anna University, Chennai) and an MSc from Technological University Dublin,
-          Ireland. Originally from Andhra Pradesh, India, I am currently based in Dublin on a Stamp 1G
-          visa and actively looking for ECE-related roles in Ireland. My background spans electrical
-          systems, signal processing, computer vision, embedded programming, and security
-          infrastructure — and I bring hands-on project experience from both academic and industry settings.
-        </p>
-      </div>
-      <div class="about-card">
-        <h3>Location</h3>
-        <p>📍 Dublin, Ireland<br>Visa: Stamp 1G<br>Origin: Andhra Pradesh, India</p>
-      </div>
-      <div class="about-card">
-        <h3>Contact</h3>
-        <p>
-          📧 chethanadasari1@gmail.com<br>
-          📱 +353 089 950 4713<br>
-          🔗 linkedin.com/in/chethana-dasari
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section>
-  <div class="container">
-    <p class="section-label">// 02</p>
-    <h2 class="section-title">Education</h2>
-
-    <div class="edu-item">
-      <div class="edu-year">2024 – 2025</div>
-      <div>
-        <div class="edu-degree">MSc in Electronics & Communication Engineering</div>
-        <div class="edu-school">Technological University Dublin · Dublin, Ireland</div>
-        <div class="edu-modules">
-          <span class="tag">Electrical Power Systems</span>
-          <span class="tag">Building Services Engineering</span>
-          <span class="tag">Electrical Machines</span>
-          <span class="tag">Power Distribution</span>
-          <span class="tag">Control Systems</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="edu-item">
-      <div class="edu-year">2019 – 2023</div>
-      <div>
-        <div class="edu-degree">BE in Electronics & Communication Engineering</div>
-        <div class="edu-school">Dhanalakshmi College of Engineering · Anna University · Chennai, India</div>
-        <div class="edu-modules">
-          <span class="tag">Signal Processing</span>
-          <span class="tag">Embedded Systems</span>
-          <span class="tag">Computer Vision</span>
-          <span class="tag">Deep Learning</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section>
-  <div class="container">
-    <p class="section-label">// 03</p>
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
-
-      <a href="https://github.com/chethanadasari/collatz-conjecture-visualisation" target="_blank" class="project-card">
-        <div class="project-icon">📊</div>
-        <div class="project-name">Collatz Conjecture Visualisation</div>
-        <div class="project-desc">
-          Explored the 3x+1 mathematical problem using MATLAB. Ran sequences up to seed 10^50,
-          benchmarked hardware performance, applied Benford's Law, and tested negative number
-          behaviour. Presented to a postgraduate engineering panel at TU Dublin.
-        </div>
-        <div class="project-link">github.com/chethanadasari/collatz-conjecture-visualisation ↗</div>
-      </a>
-
-      <a href="https://github.com/chethanadasari/5g-ofdm-simulation" target="_blank" class="project-card">
-        <div class="project-icon">📡</div>
-        <div class="project-name">5G OFDM Simulation</div>
-        <div class="project-desc">
-          Simulated 5G Orthogonal Frequency Division Multiplexing (OFDM) signal processing.
-          Explored waveform generation, channel modelling, and spectral efficiency relevant
-          to modern wireless communication systems.
-        </div>
-        <div class="project-link">github.com/chethanadasari/5g-ofdm-simulation ↗</div>
-      </a>
-
-      <a href="https://github.com/chethanadasari/cardiac-monitor" target="_blank" class="project-card">
-        <div class="project-icon">❤️</div>
-        <div class="project-name">Cardiac Monitor System</div>
-        <div class="project-desc">
-          Designed a cardiac monitoring system for real-time heart signal tracking.
-          Focused on biomedical signal acquisition and processing using embedded
-          systems principles and data visualisation techniques.
-        </div>
-        <div class="project-link">github.com/chethanadasari/cardiac-monitor ↗</div>
-      </a>
-
-      <div class="project-card" style="cursor:default;">
-        <div class="project-icon">🚗</div>
-        <div class="project-name">Real-time Vehicle Detection & Speed Estimation</div>
-        <div class="project-desc">
-          Built a computer vision system using YOLO and TensorFlow for real-time vehicle
-          detection and speed tracking. Achieved 95% detection accuracy. Led a 4-member
-          team through design, testing, and final presentation.
-        </div>
-        <div class="project-link">BE Final Year Project · Dhanalakshmi College</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section>
-  <div class="container">
-    <p class="section-label">// 04</p>
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h3>Engineering</h3>
-        <ul class="skill-list">
-          <li>Electrical Design (LV Systems)</li>
-          <li>AutoCAD (Electrical Layouts)</li>
-          <li>Power Distribution</li>
-          <li>Control Systems</li>
-          <li>Electrical Load Calculations</li>
-          <li>PLC Programming</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Programming & Tools</h3>
-        <ul class="skill-list">
-          <li>MATLAB</li>
-          <li>Python</li>
-          <li>TensorFlow / YOLO</li>
-          <li>HTML</li>
-          <li>Microsoft Excel & Word</li>
-          <li>IT & Networking (CWNA)</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Security & Systems</h3>
-        <ul class="skill-list">
-          <li>CCTV (Avigilon, Tyco, Hanwha)</li>
-          <li>Access Control (CEM, SIPASS)</li>
-          <li>Commissioning & Testing</li>
-          <li>Incident Response</li>
-          <li>Health & Safety Compliance</li>
-          <li>Documentation & Reporting</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section>
-  <div class="container">
-    <p class="section-label">// 05</p>
-    <h2 class="section-title">Work Experience</h2>
-
-    <div class="exp-card">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Corporate Security Officer</div>
-          <div class="exp-company">Synergy Security · Airbnb HQ · Dublin, Ireland</div>
-        </div>
-        <div class="exp-period">Dublin, Ireland</div>
-      </div>
-      <ul class="exp-bullets">
-        <li>Monitored CCTV and access control systems for a major corporate client (Airbnb)</li>
-        <li>Coordinated with GSOC teams on incidents, escalations, and threat response</li>
-        <li>Maintained accurate incident logs, reports, and operational documentation</li>
-        <li>Assisted with routine system checks, alarms monitoring, and testing</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section>
-  <div class="container">
-    <p class="section-label">// 06</p>
-    <h2 class="section-title">Certifications</h2>
-    <div class="certs-grid">
-      <div class="cert-item">
-        <div class="cert-icon">🛡️</div>
-        <div class="cert-name">PSA Security Guarding Licence (Ireland)</div>
-      </div>
-      <div class="cert-item">
-        <div class="cert-icon">📶</div>
-        <div class="cert-name">CWNA — Wireless Networking (Udemy)</div>
-      </div>
-      <div class="cert-item">
-        <div class="cert-icon">🐍</div>
-        <div class="cert-name">Python Programming (Udemy)</div>
-      </div>
-      <div class="cert-item">
-        <div class="cert-icon">🌐</div>
-        <div class="cert-name">HTML Development (Udemy)</div>
-      </div>
-      <div class="cert-item">
-        <div class="cert-icon">⚙️</div>
-        <div class="cert-name">PLC Programming (Udemy)</div>
-      </div>
-      <div class="cert-item">
-        <div class="cert-icon">📐</div>
-        <div class="cert-name">CAD / AutoCAD Fundamentals</div>
-      </div>
-      <div class="cert-item">
-        <div class="cert-icon">🏗️</div>
-        <div class="cert-name inprogress">Revit MEP Beginner</div>
-      </div>
-      <div class="cert-item">
-        <div class="cert-icon">⚡</div>
-        <div class="cert-name inprogress">Electrical Design for Buildings (Udemy)</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <p>Chethana Dasari · Dublin, Ireland ·
-      <a href="mailto:chethanadasari1@gmail.com">chethanadasari1@gmail.com</a> ·
-      <a href="https://www.linkedin.com/in/chethana-dasari/" target="_blank">LinkedIn</a> ·
-      <a href="https://github.com/chethanadasari" target="_blank">GitHub</a>
-    </p>
-  </div>
-</footer>
-
+<p class="p1"><span class="s1">// ECE ENGINEER · DUBLIN, IRELAND</span></p>
+<h1 style="margin: 0.0px 0.0px 16.0px 0.0px; font: 48.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2"><span class="s1">Chethana</span></h1>
+<p class="p3"><span class="s1">Dasari</span></p>
+<p class="p4"><span class="s1">MSc Electronics &amp; Communication Engineering</span></p>
+<p class="p5"><span class="s1">Engineer with dual degrees in ECE from India and Ireland,<br>
+skilled in signal systems, electrical power, MATLAB, Python,<br>
+and enterprise security infrastructure. Open to opportunities in Ireland.</span></p>
+<p class="p6"><span class="s2"><a href="https://www.linkedin.com/in/chethana-dasari/">LinkedIn Profile</a></span><span class="s3"> <a href="https://github.com/chethanadasari"><span class="s4">GitHub →</span></a> <a href="mailto:chethanadasari1@gmail.com"><span class="s4">Contact Me</span></a></span></p>
+<p class="p7"><span class="s5">MSc</span></p>
+<p class="p8"><span class="s5">TU Dublin 2025</span></p>
+<p class="p9"><span class="s1">Available for Work</span></p>
+<p class="p10"><span class="s1">// 01</span></p>
+<h2 style="margin: 0.0px 0.0px 48.0px 0.0px; font: 36.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2"><span class="s1">About Me</span></h2>
+<h3 style="margin: 0.0px 0.0px 12.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3"><span class="s5">PROFESSIONAL SUMMARY</span></h3>
+<p class="p13"><span class="s5">Electronics and Communication Engineer with a BE from Dhanalakshmi College of Engineering (Anna University, Chennai) and an MSc from Technological University Dublin (2025). Based in Dublin on a Stamp 1G visa and actively seeking ECE-related roles in Ireland. My background spans electrical power systems, signal processing, 5G wireless communications, biomedical DSP, computer vision, PLC programming, and enterprise security infrastructure — with hands-on project experience across academic and industry settings.</span></p>
+<h3 style="margin: 0.0px 0.0px 12.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3"><span class="s5">LOCATION</span></h3>
+<p class="p13"><span class="s6">📍</span><span class="s5"> Dublin, Ireland</span><span class="s1"><br>
+</span><span class="s5">Visa: Stamp 1G</span><span class="s1"><br>
+</span><span class="s5">Origin: Andhra Pradesh, India</span></p>
+<h3 style="margin: 0.0px 0.0px 12.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3"><span class="s5">CONTACT</span></h3>
+<p class="p13"><span class="s6">📧</span><span class="s5"> chethanadasari1@gmail.com</span><span class="s1"><br>
+</span><span class="s6">📱</span><span class="s5"> +353 089 950 4713</span><span class="s1"><br>
+</span><span class="s6">🔗</span><span class="s5"> linkedin.com/in/chethana-dasari</span></p>
+<p class="p10"><span class="s1">// 02</span></p>
+<h2 style="margin: 0.0px 0.0px 48.0px 0.0px; font: 36.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2"><span class="s1">Education</span></h2>
+<p class="p6"><span class="s1">2024 – 2025</span></p>
+<p class="p14"><span class="s1">MSc in Electronics &amp; Communication Engineering</span></p>
+<p class="p15"><span class="s1">Technological University Dublin · Dublin, Ireland</span></p>
+<p class="p16"><span class="s1">Electrical Power Systems</span></p>
+<p class="p16"><span class="s1">Building Services Engineering</span></p>
+<p class="p16"><span class="s1">Electrical Machines</span></p>
+<p class="p16"><span class="s1">Power Distribution</span></p>
+<p class="p16"><span class="s1">Control Systems</span></p>
+<p class="p6"><span class="s1">2019 – 2023</span></p>
+<p class="p14"><span class="s1">BE in Electronics &amp; Communication Engineering</span></p>
+<p class="p15"><span class="s1">Dhanalakshmi College of Engineering · Anna University · Chennai, India</span></p>
+<p class="p16"><span class="s1">Signal Processing</span></p>
+<p class="p16"><span class="s1">Embedded Systems</span></p>
+<p class="p16"><span class="s1">Computer Vision</span></p>
+<p class="p16"><span class="s1">Deep Learning</span></p>
+<p class="p16"><span class="s1">Communication Systems</span></p>
+<p class="p10"><span class="s1">// 03</span></p>
+<h2 style="margin: 0.0px 0.0px 48.0px 0.0px; font: 36.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2"><span class="s1">Projects</span></h2>
+<p class="p17"><span class="s5"><a href="https://github.com/chethanadasari/cardiac-monitor">❤️<span class="s7"></span></a></span></p>
+<p class="p18"><span class="s5"><a href="https://github.com/chethanadasari/cardiac-monitor">Cardiac Monitor — Live ECG Dashboard<span class="s8"></span></a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/cardiac-monitor">Python</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/cardiac-monitor">NumPy</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/cardiac-monitor">Streamlit</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/cardiac-monitor">DSP</a></span></p>
+<p class="p20"><span class="s5"><a href="https://github.com/chethanadasari/cardiac-monitor">Single-lead ECG simulator with Pan-Tompkins QRS detection, HRV analysis (SDNN, RMSSD, pNN50), and four cardiac rhythms. FIR filters built from scratch. Achieves ≥95% sensitivity down to ~5 dB SNR (AAMI EC57 clinical benchmark). Live Streamlit web dashboard with CI across Python 3.10–3.12.<span class="s9"></span></a></span></p>
+<p class="p9"><span class="s5"><a href="https://github.com/chethanadasari/cardiac-monitor">github.com/chethanadasari/cardiac-monitor ↗<span class="s10"></span></a></span></p>
+<p class="p17"><span class="s5"><a href="https://github.com/chethanadasari/5g-ofdm-simulation">📡<span class="s7"></span></a></span></p>
+<p class="p18"><span class="s5"><a href="https://github.com/chethanadasari/5g-ofdm-simulation">5G NR OFDM Transceiver Simulation<span class="s8"></span></a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/5g-ofdm-simulation">Python</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/5g-ofdm-simulation">5G NR</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/5g-ofdm-simulation">OFDM</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/5g-ofdm-simulation">BER Analysis</a></span></p>
+<p class="p20"><span class="s5"><a href="https://github.com/chethanadasari/5g-ofdm-simulation">Full 5G NR OFDM transceiver pipeline — IFFT/FFT, cyclic prefix, Gray-coded QPSK/16QAM/64QAM. Modelled AWGN and 3GPP TDL-A multipath channels with zero-forcing equalisation. BER vs SNR curves validated against theoretical benchmarks. 18-case pytest suite.<span class="s9"></span></a></span></p>
+<p class="p9"><span class="s5"><a href="https://github.com/chethanadasari/5g-ofdm-simulation">github.com/chethanadasari/5g-ofdm-simulation ↗<span class="s10"></span></a></span></p>
+<p class="p17"><span class="s5"><a href="https://github.com/chethanadasari/collatz-conjecture-visualisation">📊<span class="s7"></span></a></span></p>
+<p class="p18"><span class="s5"><a href="https://github.com/chethanadasari/collatz-conjecture-visualisation">Collatz Conjecture Visualisation<span class="s8"></span></a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/collatz-conjecture-visualisation">Python</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/collatz-conjecture-visualisation">MATLAB</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/collatz-conjecture-visualisation">AWS</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/collatz-conjecture-visualisation">Research</a></span></p>
+<p class="p20"><span class="s5"><a href="https://github.com/chethanadasari/collatz-conjecture-visualisation">Explored the 3x+1 problem with seeds up to 10^50 using Python &amp; MATLAB. Applied Benford's Law analysis and negative-number behaviour testing. Deployed on AWS Cloud for distributed testing — improved computation efficiency by 40%. Presented to postgraduate panel at TU Dublin.<span class="s9"></span></a></span></p>
+<p class="p9"><span class="s5"><a href="https://github.com/chethanadasari/collatz-conjecture-visualisation">github.com/chethanadasari/collatz-conjecture-visualisation ↗<span class="s10"></span></a></span></p>
+<p class="p17"><span class="s5"><a href="https://github.com/chethanadasari/signal-analyser">🔬<span class="s7"></span></a></span></p>
+<p class="p18"><span class="s5"><a href="https://github.com/chethanadasari/signal-analyser">Signal Analyser<span class="s8"></span></a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/signal-analyser">Python</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/signal-analyser">FFT</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/signal-analyser">DSP</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/signal-analyser">Visualisation</a></span></p>
+<p class="p20"><span class="s5"><a href="https://github.com/chethanadasari/signal-analyser">Signal analysis toolkit for biomedical and engineering waveforms — FFT spectral analysis, FIR/IIR filtering, noise characterisation, and data visualisation. Designed for rapid inspection and processing of real-world sensor signals.<span class="s9"></span></a></span></p>
+<p class="p9"><span class="s5"><a href="https://github.com/chethanadasari/signal-analyser">github.com/chethanadasari/signal-analyser ↗<span class="s10"></span></a></span></p>
+<p class="p17"><span class="s5"><a href="https://github.com/chethanadasari/weather-analyser">🌤️<span class="s7"></span></a></span></p>
+<p class="p18"><span class="s5"><a href="https://github.com/chethanadasari/weather-analyser">Dublin Weather Analyser<span class="s8"></span></a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/weather-analyser">Python</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/weather-analyser">NumPy</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/weather-analyser">Matplotlib</a></span></p>
+<p class="p19"><span class="s1"><a href="https://github.com/chethanadasari/weather-analyser">REST API</a></span></p>
+<p class="p20"><span class="s5"><a href="https://github.com/chethanadasari/weather-analyser">Live 72-hour weather forecast tool for Dublin using the Open-Meteo API. Fetches real-time temperature, humidity, and wind-speed data and generates professional 3-panel forecast charts exported as PNG for reporting. No API key required.<span class="s9"></span></a></span></p>
+<p class="p9"><span class="s5"><a href="https://github.com/chethanadasari/weather-analyser">github.com/chethanadasari/weather-analyser ↗<span class="s10"></span></a></span></p>
+<p class="p17"><span class="s5">🚗</span></p>
+<p class="p18"><span class="s5">Real-Time Vehicle Detection &amp; Speed Estimation</span></p>
+<p class="p19"><span class="s1">Python</span></p>
+<p class="p19"><span class="s1">YOLO</span></p>
+<p class="p19"><span class="s1">TensorFlow</span></p>
+<p class="p19"><span class="s1">Computer Vision</span></p>
+<p class="p20"><span class="s5">Computer vision pipeline integrating deep learning (YOLO, TensorFlow) with sensor data for real-time vehicle detection and speed tracking. Achieved 95% detection accuracy. Led a 4-member team through design reviews, testing, and final presentation.</span></p>
+<p class="p9"><span class="s5">BE Final Year Project · Dhanalakshmi College of Engineering</span></p>
+<p class="p10"><span class="s1">// 04</span></p>
+<h2 style="margin: 0.0px 0.0px 48.0px 0.0px; font: 36.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2"><span class="s1">Skills</span></h2>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3"><span class="s5">ELECTRICAL ENGINEERING</span></h3>
+<ul class="ul1">
+  <li class="li22"><span class="s11"></span><span class="s1">LV System Design</span><span class="s12"> </span><span class="s1">AutoCAD (Electrical Layouts)</span><span class="s12"> </span><span class="s1">Power Distribution</span><span class="s12"> </span><span class="s1">Electrical Load Calculations</span><span class="s12"> </span><span class="s1">Control Systems</span><span class="s12"> </span><span class="s1">PLC Programming</span><span class="s12"> </span><span class="s1">Revit MEP (Beginner)</span></li>
+</ul>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3"><span class="s5">PROGRAMMING &amp; SIMULATION</span></h3>
+<ul class="ul1">
+  <li class="li22"><span class="s11"></span><span class="s1">Python (NumPy, Matplotlib)</span><span class="s12"> </span><span class="s1">MATLAB</span><span class="s12"> </span><span class="s1">TensorFlow / YOLO</span><span class="s12"> </span><span class="s1">Streamlit</span><span class="s12"> </span><span class="s1">DSP / FIR Filter Design</span><span class="s12"> </span><span class="s1">5G NR / OFDM Simulation</span><span class="s12"> </span><span class="s1">HTML / Git / GitHub</span></li>
+</ul>
+<h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #1de3b3; -webkit-text-stroke: #1de3b3"><span class="s5">SECURITY &amp; SYSTEMS</span></h3>
+<ul class="ul1">
+  <li class="li22"><span class="s11"></span><span class="s1">CCTV (Avigilon, Tyco, Hanwha)</span><span class="s12"> </span><span class="s1">Access Control (CEM, SIPASS)</span><span class="s12"> </span><span class="s1">GSOC Operations</span><span class="s12"> </span><span class="s1">Incident Response</span><span class="s12"> </span><span class="s1">Commissioning &amp; Testing</span><span class="s12"> </span><span class="s1">H&amp;S Compliance</span><span class="s12"> </span><span class="s1">IT Networking (CWNA)</span></li>
+</ul>
+<p class="p10"><span class="s1">// 05</span></p>
+<h2 style="margin: 0.0px 0.0px 48.0px 0.0px; font: 36.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2"><span class="s1">Work Experience</span></h2>
+<p class="p23"><span class="s5">GSOC Operator</span></p>
+<p class="p6"><span class="s5">Synergy Security · deployed to Airbnb EMEA HQ · Dublin, Ireland</span></p>
+<p class="p24"><span class="s1">Present</span></p>
+<ul class="ul1">
+  <li class="li15"><span class="s13"></span><span class="s5">Operate the Global Security Operations Centre (GSOC) for Airbnb's EMEA headquarters, providing 24/7 monitoring of physical security systems across the campus.</span></li>
+  <li class="li15"><span class="s13"></span><span class="s5">Monitor and manage enterprise CCTV infrastructure (Avigilon, Tyco, Hanwha) and access control platforms (CEM, SIPASS, Avigilon Alta), ensuring continuous operational uptime and rapid response to alarms and anomalies.</span></li>
+  <li class="li15"><span class="s13"></span><span class="s5">Coordinate incident escalation, threat assessment, and emergency response procedures in line with Airbnb's global security protocols and PSA regulatory standards.</span></li>
+  <li class="li15"><span class="s13"></span><span class="s5">Maintain accurate real-time incident logs, security reports, and compliance documentation; produce shift handover reports for senior security management.</span></li>
+  <li class="li15"><span class="s13"></span><span class="s5">Perform routine system health checks, alarm testing, and commissioning support to uphold site safety and building services compliance.</span></li>
+</ul>
+<p class="p10"><span class="s1">// 06</span></p>
+<h2 style="margin: 0.0px 0.0px 48.0px 0.0px; font: 36.0px 'Helvetica Neue'; color: #e2e8f2; -webkit-text-stroke: #e2e8f2"><span class="s1">Certifications</span></h2>
+<p class="p25"><span class="s5">🛡️</span></p>
+<p class="p26"><span class="s5">PSA Security Guarding Licence (Ireland)</span></p>
+<p class="p25"><span class="s5">📶</span></p>
+<p class="p26"><span class="s5">CWNA — Wireless Networking (Udemy)</span></p>
+<p class="p25"><span class="s5">🐍</span></p>
+<p class="p26"><span class="s5">Python Programming (Udemy)</span></p>
+<p class="p25"><span class="s5">🌐</span></p>
+<p class="p26"><span class="s5">HTML Development (Udemy)</span></p>
+<p class="p25"><span class="s5">⚙️</span></p>
+<p class="p26"><span class="s5">PLC Programming (Udemy)</span></p>
+<p class="p25"><span class="s5">📐</span></p>
+<p class="p26"><span class="s5">CAD / AutoCAD Fundamentals</span></p>
+<p class="p25"><span class="s5">🏗️</span></p>
+<p class="p27"><span class="s5">Revit MEP Beginner</span></p>
+<p class="p25"><span class="s5">⚡</span></p>
+<p class="p27"><span class="s5">Electrical Design for Buildings (Udemy)</span></p>
+<p class="p28"><span class="s1">Chethana Dasari · Dublin, Ireland · <a href="mailto:chethanadasari1@gmail.com"><span class="s14">chethanadasari1@gmail.com</span></a> · <a href="https://www.linkedin.com/in/chethana-dasari/"><span class="s14">LinkedIn</span></a> · <a href="https://github.com/chethanadasari"><span class="s14">GitHub</span></a></span></p>
 </body>
 </html>
